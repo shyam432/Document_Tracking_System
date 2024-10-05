@@ -1,0 +1,16 @@
+{% extends 'navigation.html' %}
+{% block body %}
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+
+        <h3><strong>Login your account</strong></h3><hr>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        User Name:<br><input type="text" placeholder="Enter user name" name="uname" style="border-radius:8px;width:600px;height:35px;"><br><br>
+        Password:<br><input type="password" placeholder="Enter password" name="pwd" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+
+        <input type="submit" value="Sign in" style="color:white;border-radius:8px;width:100px;height:35px;background-color:#333;border:1px solid black">
+    </form>
+
+    </div>
+{% endblock %}

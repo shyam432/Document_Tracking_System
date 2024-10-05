@@ -1,0 +1,103 @@
+{% extends 'navigation.html' %}
+{% block body %}
+<style>
+    button{
+    border:1 px solid orange;
+    border-radius:4px;
+    color:white;
+    background-color:orange;
+    }
+</style>
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+<center><h3><strong>View Request</strong></h3><hr></center>
+<div align="center">
+<table id="myTable" border="1px" style="width:100%;border-radius:8px" class="table table-border">
+        <thead style="background-color:#a0522d;color:white">
+
+        <tr>
+            <td> From</td>
+            <td> From Dept</td>
+            <td> Subject</td>
+            <td> Description</td>
+            <td> To Designation</td>
+            <td> File Name</td>
+            <td> Status </td>
+            <td> Download</td>
+            <td> Assign</td>
+
+        </tr>
+         </thead>
+
+    {% for i in data1 %}
+
+       {% ifnotequal request.user.username i.emp.user.username %}
+        {% ifequal emp.type.type "Executive Engineer" %}
+        {% ifequal i.status.status "Forwarded"  %}
+
+        <tr>
+            <td> {{i.emp.user.username}}</td>
+            <td> {{i.emp.department.dept}}</td>
+            <td> {{i.sub}}</td>
+            <td> {{i.des}}</td>
+            <td> {{i.type.type}}</td>
+            <td> {{i.file}}</td>
+            <td> {{i.status.status}}</td>
+            <td><button><a  href="{{i.file.url}}" download >Download</a></button></td>
+            <td><button><a href="{% url 'change_status' i.id %}"> Assign status</a></button></td>
+
+        </tr>
+
+    {% endifequal %}
+    {% endifequal %}
+    {% ifequal emp.type.type "Deputy Engineer" %}
+    {% if "pending" in i.status.status  or "No" in i.status.status  %}
+
+        <tr>
+            <td> {{i.emp.user.username}}</td>
+            <td> {{i.emp.department.dept}}</td>
+            <td> {{i.sub}}</td>
+            <td> {{i.des}}</td>
+            <td> {{i.type.type}}</td>
+            <td> {{i.file}}</td>
+            {% ifequal i.emp.type.type "Executive Engineer" %}
+            <td> ------ </td>
+            {% else %}
+            <td> {{i.status.status}}</td>
+            {% endifequal %}
+            <td><button><a  href="{{i.file.url}}" download >Download</a></button></td>
+            {% ifequal i.emp.type.type "Executive Engineer" %}
+            <td><button>Can't Assign</button></td>
+            {% else %}
+            <td><button><a href="{% url 'change_status' i.id %}"> Assign status</a></button></td>
+            {% endifequal %}
+        </tr>
+
+    {% endif %}
+    {% endifequal %}
+    {% if i.type.id > emp.type.id  %}
+        {% ifequal i.status.status "pending" %}
+
+        <tr>
+            <td> {{i.emp.user.username}}</td>
+            <td> {{i.emp.department.dept}}</td>
+            <td> {{i.sub}}</td>
+            <td> {{i.des}}</td>
+            <td> {{i.type.type}}</td>
+            <td> {{i.file}}</td>
+
+            <td> ------ </td>
+            <td><button><a  href="{{i.file.url}}" download>Download</a></button></td>
+
+            <td><button>Can't Assign</button></td>
+
+        </tr>
+
+    {% endifequal %}
+    {% endif %}
+    {% endifnotequal %}
+        {% endfor %}
+
+</table>
+</div>
+</div>
+{% endblock %}

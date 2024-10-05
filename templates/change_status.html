@@ -1,0 +1,37 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% ifequal error "not" %}
+<script>
+    alert('Document File Forwarded to Executive Engineer!');
+    window.location = ("{% url 'viewfile' %}");
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert('Accepted.....!');
+    window.location = ("{% url 'viewfile' %}");
+</script>
+{% endifequal %}
+
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+
+        <h3><strong>Change Status</strong></h3><hr>
+    <form method="post" action="">
+        {% csrf_token %}
+        File Id:<br><input type="number" name="id" value="{{data.id}}" style="border-radius:8px;width:600px;height:35px;" readonly><br><br>
+
+        Change Status : <br><select style="border-radius:8px;width:600px;height:35px;"  name="status">
+                    {% ifequal emp.type.type "Deputy Engineer" %}
+               <option value="Forwarded">Accept</option>
+                    {% else %}
+               <option value="Accept">Accept</option>
+        {% endifequal %}
+               <option value="Reject">Reject</option>
+
+    </select><br><br>
+
+         <br><input type="submit" value="Submit" style="color:white;border-radius:8px;width:100px;height:35px;background-color:#333;border:1px solid black">
+        </form>
+
+</div>
+    {% endblock %}

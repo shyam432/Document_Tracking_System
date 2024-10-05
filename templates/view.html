@@ -1,0 +1,50 @@
+
+{% extends 'navigation.html' %}
+{% block body %}
+<style>
+    button{
+    border:1 px solid orange;
+    border-radius:4px;
+    color:white;
+    background-color:orange;
+    }
+</style>
+
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+<center><h3><strong>View Employee</strong></h3><hr></center>
+<div align="center">
+<table id="myTable" border="1px" style="width:100%;border-radius:8px" class="table table-border">
+        <thead style="background-color:#a0522d;color:white">
+
+        <tr>
+            <td> Full Name</td>
+            <td> Email Id</td>
+            <td> Designation</td>
+            <td> Date-of-birth</td>
+            <td> Gender</td>
+            <td> Department</td>
+            <td> Address</td>
+            <td> Mobile</td>
+            <td> Edit</td>
+            <td> Delete</td>
+        </tr>
+         </thead>
+    {% for i in data1 %}
+        <tr>
+            <td> {{i.user.first_name}} {{i.user.last_name}}</td>
+            <td> {{i.user.email}}</td>
+            <td> {{i.type.type}}</td>
+            <td> {{i.d_birth}}</td>
+            <td> {{i.gen}}</td>
+            <td> {{i.department.dept}}</td>
+            <td> {{i.add}}</td>
+            <td> {{i.mobile}}</td>
+            <td> <button><a href="{% url 'editview' i.id %}">Edit</a> </button></td>
+            <td> <button><a href="{% url 'delete_view' i.id %}">Delete</a> </button></td>
+        </tr>
+        {% endfor %}
+
+</table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'navigation.html' %}
+{% block body %}
+
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+
+        <h3><strong>Add Employee</strong></h3><hr>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        First Name:<br><input type="text" placeholder="Enter First name" name="fname" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        Last Name:<br><input type="text" placeholder="Enter Last name" name="lname" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        User Name:<br><input type="text" placeholder="Enter user name" name="uname" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        Password:<br><input type="password" placeholder="Enter password" name="pwd" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        Date Birth:<br><input type="date"  name="date" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        Email:<br><input type="email" placeholder="Enter Email" name="email" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+        Select Gender:<br><select name="gen" style="border-radius:8px;width:600px;height:35px;">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+    </select><br><br>
+
+
+        Select Department:<br><select name="dept" style="border-radius:8px;width:600px;height:35px;">
+        {% for i in dept %}
+        <option value="{{i.dept}}">{{i.dept}}</option>
+        {% endfor %}
+        </select><br><br>
+
+
+        Select Type:<br><select name="type" style="border-radius:8px;width:600px;height:35px;">
+        {% for i in type %}
+        <option value="{{i.type}}">{{i.type}}</option>
+        {% endfor %}
+    </select><br><br>
+
+
+        Address:<br><input type="text" placeholder="Enter Address" name="add" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
+
+        Mobile Number:<br><input type="number" name="mobile" style="border:1px solid black;border-radius:8px;width:600px;height:35px;"><br><br>
+
+        <input type="submit" value="Sign in" style="color:white;border-radius:8px;width:100px;height:35px;background-color:#333;border:1px solid black">
+
+        </form>
+
+    </div>
+{% endblock %}

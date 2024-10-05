@@ -1,0 +1,39 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% if error %}
+<script>
+    alert('Upload File Successfully');
+    window.location=('{% url 'viewstatus' %}');
+</script>
+{% endif %}
+
+<div align="center" style="color:Black;border:1px solid white;border-radius:8px;background-color:white;padding:50px">
+
+        <h3><strong>Upload File</strong></h3><hr>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        Subject:<br><input type="text" placeholder="Enter Subject" name="sub" style="border-radius:8px;width:600px;height:35px;"><br><br>
+        Description:<br><textarea type="text" placeholder="Write Your Description" name="des" style="border-radius:8px;width:600px;height:55px;"></textarea><br><br>
+
+        Department : <br><select style="border-radius:8px;width:600px;height:35px;"  name="dept">
+        {% for i in dept %}
+               <option value="{{i.dept}}">{{i.dept}}</option>
+                {% endfor %}
+    </select><br><br>
+
+
+        Designation : <br>
+            <select style="border-radius:8px;width:600px;height:35px;" name="type">
+               {% for i in type %}
+               <option value="{{i.type}}">{{i.type}}</option>
+               {% endfor %}
+           </select><br><br>
+
+        Select File <br>
+            <input style="border:1px solid black;border-radius:8px;width:600px;height:35px;"  type="file" name="file"><br>
+
+        <br><input type="submit" value="upload file" style="color:white;border-radius:8px;width:100px;height:35px;background-color:#333;border:1px solid black">
+        </form>
+
+    </div>
+    {% endblock %}
